@@ -84,6 +84,73 @@ void router::calculate(router &G)
         }
     }
     //dijkstra ends
+    
+    bool flag_node[20];
+    for(int i=0;i<size;++i)
+        flag_node[i]=true;
+    for(int i=0;i<size;++i)
+    {
+        if(i==v0)
+            continue;
+        int k=i;
+        int sum=0;
+        for(int j=0;j<size;++j)
+        {
+            k=pre[k];
+            if(k<0)
+            {
+                break;
+            }
+            for(int m=0;m<size;++m)
+            {
+                if(k==m)
+                    flag_node[m]=false;
+            }
+            ++sum;
+            if(k==v0)
+                break;
+        }
+    }
+    cout<<"\t\t----------------------------------------------"<<endl;
+    queue<int> q;
+    for(int i=0;i<size;++i)
+    {
+        if(i==v0)
+            continue;
+        if(flag_node[i]==false)
+            continue;
+        q.push(i);
+        cout<<"\t\t\t";
+        stack<int> ss;
+        int d=i;
+        for(int j=0;j<size;++j)
+        {
+            if(pre[d]<0)
+            {
+                continue;
+            }
+            d=pre[d];
+            ss.push(d);
+            if(d==v0)
+            {
+                int w=0;
+                int sum=0;
+                while(!ss.empty())
+                {
+                    cout<<router_info[ss.top()].num<<"->";
+                    ss.pop();
+                    sum++;
+                    w++;
+                }
+                cout<<router_info[i].num<<endl;
+                break;
+            }
+        }
+    }
+    
+    cout<<endl;
+
+    
     cout <<"\t\t-->Here is the information you need:"<<endl;
     cout<<"\t\t-------------------------------------------"<<endl;
     cout<<"\t\t| Destination IP  "<<"|  Next jump  |"<<"    Path |"<<endl;
