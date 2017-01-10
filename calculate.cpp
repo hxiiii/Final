@@ -16,6 +16,7 @@ router::router()
 
 void router::calculate(router &G)
 {
+	cout<<"HHHHHHHHH"<<endl;
     int s;
     int v0=0;
     cout<<"size is "<<size<<endl;
